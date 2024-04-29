@@ -5,18 +5,13 @@ public abstract class Bag
 {
     private List<IItem> _items;
 
-    protected Bag(IItem item)
-    {
-        _items = new List<IItem> { item };
-    }
-
-    public void ShowItem()
+    public virtual void ShowItem()
     {
         Debug.Log($"Для тебя есть {_items[0].Name}");
     }
 
-    public void RefuseToShowItem()
+    protected void MakeFill(IItem item)
     {
-        Debug.Log($"Мне нечего тебе предложить");
+        _items = new List<IItem> { item };
     }
 }
