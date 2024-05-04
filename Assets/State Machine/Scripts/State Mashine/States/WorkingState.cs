@@ -1,18 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class WorkingState : PeacetimeState
 {
-    private readonly WorkingStateConfig _workingStateConfig;
+    private readonly Storage _storage;
 
-    public WorkingState(IStateSwitcher stateSwitcher, Character character) : base(stateSwitcher)
-    => _workingStateConfig = character.Config.WorkingStateConfig;
-
-    private Vector3 _targetPosition => new Vector3(Character.transform.position.x, _workingStateConfig.MaxHeight, Character.transform.position.z);
+    public WorkingState(IStateSwitcher stateSwitcher, Character character) : base(stateSwitcher, character) => _storage = character.Storage;
 
     public override void Update()
     {
-        Character.transform.position = Vector3.MoveTowards(Character.transform.position, _targetPosition, _workingStateConfig.TimeToReachMaxHeight * Time.deltaTime);
+        _storage.AddItem();
+    }
+
+    protected override void AddStorageActionCallbacks()
+    {
+        base.AddStorageActionCallbacks();
+
+        _storage.Fulled += StateSwitcher.SwitchState<MoveToRestState>;
+    }
+
+    protected override void RemoveStorageActionCallbacks()
+    {
+        base.RemoveStorageActionCallbacks();
+
+        _storage.Fulled -= StateSwitcher.SwitchState<MoveToRestState>;
     }
 }

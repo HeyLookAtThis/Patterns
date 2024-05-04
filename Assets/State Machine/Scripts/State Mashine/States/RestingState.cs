@@ -1,22 +1,25 @@
-using UnityEngine;
-
 public class RestingState : PeacetimeState
 {
-    private readonly RestingStateConfig _restingStateConfig;
+    private readonly Storage _storage;
 
-    private float _timeHasPassed;
-
-    public RestingState(IStateSwitcher stateSwitcher, Character character) : base(stateSwitcher)
-    => _restingStateConfig = character.Config.RestingStateConfig;
+    public RestingState(IStateSwitcher stateSwitcher, Character character) : base(stateSwitcher, character) => _storage = character.Storage;
 
     public override void Update()
     {
-        _timeHasPassed += Time.deltaTime;
+        _storage.RemoveItem();
+    }
 
-        if(_timeHasPassed >= _restingStateConfig.Time)
-        {
-            _timeHasPassed = 0;
-            StateSwitcher.SwitchState<MovementState>();
-        }
+    protected override void AddStorageActionCallbacks()
+    {
+        base.AddStorageActionCallbacks();
+
+        _storage.Emptied += StateSwitcher.SwitchState<MoveToWorkState>;
+    }
+
+    protected override void RemoveStorageActionCallbacks()
+    {
+        base.RemoveStorageActionCallbacks();
+
+        _storage.Emptied -= StateSwitcher.SwitchState<MoveToWorkState>;
     }
 }

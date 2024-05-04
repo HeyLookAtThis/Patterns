@@ -12,12 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd126331431dcbf4581082a27f51da58, type: 3}
   m_Name: CharacterConfig
   m_EditorClassIdentifier: 
-  _workingStateConfig:
-    _maxHeight: 4
-    _timeToReachMaxHeight: 1
   _movementStateConfig:
     <Speed>k__BackingField: 3
-    <WorkingPlace>k__BackingField: {x: 4, y: 0, z: 4}
-    <RestingPlace>k__BackingField: {x: -4, y: 0, z: -4}
-  _restingStateConfig:
-    <Time>k__BackingField: 3
+    <ReachingDistance>k__BackingField: 0.5
+    <WorkingPlace>k__BackingField: {x: 4, y: 1, z: 4}
+    <RestingPlace>k__BackingField: {x: -4, y: 1, z: -4}
