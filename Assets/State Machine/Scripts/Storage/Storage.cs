@@ -27,7 +27,6 @@ public class Storage : MonoBehaviour
         if(_currentItemCount < _storageConfig.CapacityConfig.MaxValue)
         {
             _currentItemCount += Time.deltaTime;
-            Debug.Log("Работаю");
         }
         else
         {
@@ -41,7 +40,6 @@ public class Storage : MonoBehaviour
         if (_currentItemCount > _storageConfig.CapacityConfig.MinValue)
         {
             _currentItemCount -= Time.deltaTime;
-            Debug.Log("Отдыхаю, жи есть");
         }
         else
         {

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class RestingState : PeacetimeState
 {
     private readonly Storage _storage;
@@ -7,6 +9,13 @@ public class RestingState : PeacetimeState
     public override void Update()
     {
         _storage.RemoveItem();
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+
+        Debug.Log("Отдыхаю, жи есть");
     }
 
     protected override void AddStorageActionCallbacks()

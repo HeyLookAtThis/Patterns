@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class WorkingState : PeacetimeState
 {
     private readonly Storage _storage;
@@ -7,6 +9,13 @@ public class WorkingState : PeacetimeState
     public override void Update()
     {
         _storage.AddItem();
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+
+        Debug.Log("Работаю");
     }
 
     protected override void AddStorageActionCallbacks()
